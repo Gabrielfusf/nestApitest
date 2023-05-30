@@ -1,7 +1,6 @@
-/* eslint-disable prettier/prettier */
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('cliente')
 export class Cliente {
     @PrimaryGeneratedColumn()
     id: number;
@@ -12,15 +11,8 @@ export class Cliente {
     @Column({ length: 255 })
     email: string;
 
-    @Column({ length: 11 })
-    cpf: string;
+    @Column({ length: 255 })
+    password: string;
 
-    @Column({ length: 11 })
-    fone: string;
 
-    @Column({ length: 11 })
-    celular: string;
-
-    @Column()
-    status: boolean;
 }

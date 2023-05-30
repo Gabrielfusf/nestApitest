@@ -1,11 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
+import { AuthClienteDto } from './dto/auth.dto';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 
 @Controller('cliente')
 export class ClienteController {
   constructor(private readonly clienteService: ClienteService) {}
+
+
+  @Post('login')
+  login(@Body() authDto: AuthClienteDto) {
+    return this.clienteService.login(authDto)
+    // Implemente a lógica de autenticação ou qualquer outra lógica relacionada ao login
+  }
+
 
   @Post()
   create(@Body() createClienteDto: CreateClienteDto) {
@@ -22,7 +31,7 @@ export class ClienteController {
     return this.clienteService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {
     return this.clienteService.update(+id, updateClienteDto);
   }
